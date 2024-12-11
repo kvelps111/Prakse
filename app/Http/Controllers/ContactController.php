@@ -11,11 +11,14 @@ class ContactController extends Controller
         $request->validate([
             'email' => 'required|email',
             'message' => 'required',
+            'option' => 'required',
+            'priority'=> 'required',
         ]);
 
         Contact::create($request->all());
 
         return redirect()->back()->with('success', 'Form submitted successfully!');
+        
         
     }
     

@@ -11,6 +11,8 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->text('message');
+            $table->string('option');
+            $table->string('priority');
             $table->timestamps();
         });
     }

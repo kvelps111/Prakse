@@ -7,9 +7,13 @@
     <title>Form</title>
     <style>
         body{
-            text-align: center
-        }input, button{
+            text-align:  center
+        }input, button,select{
             font-size: 2em}
+            select{
+                font-size: 1em}
+                label{
+                    font-size: 1.5em}
     </style>
 </head>
 <body>
@@ -21,6 +25,23 @@
     @csrf
     <input type="email" name="email" id="email" placeholder="Email" ><br>
     <input type="text" name="message" id="message" placeholder="Message"><br><br>
+    <select name="option" id="option">
+        <option value="techical support">Tehniskais atbalsts</option>
+        <option value="sale">Pārdošana</option>
+        <option value="else">Cits</option>
+
+    </select>
+    <h2>Priority level</h2>
+
+    <input type="radio" name="priority" value="low">
+    <label for="low">Low</label>
+
+    <input type="radio" name="priority" value="medium">
+    <label for="medium">Medium</label>
+
+    <input type="radio" name="priority" value="high">
+    <label for="medium">High</label><br><br>
+
     <button type="submit">Submit</button><br>
 
 

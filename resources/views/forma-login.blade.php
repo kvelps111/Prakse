@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+    @csrf
     <h1>Login</h1>
     @if($errors->any())
         <div>
@@ -27,11 +28,12 @@
     @endif
     <form method="POST" action="/login">
         @csrf
-        <input type="email" name="email" id="email" placeholder="Email" required><br>
+        <input type="email" name="email" id="email" placeholder="Email" required><br><br>
         <input type="password" name="password" id="password" placeholder="Password" required><br><br>
-        <button type="submit">Login</button><br>
+        <button type="submit">Login</button><br><br>
     </form>
-    <a href="forma.admin.blade.php">Admin register</a>
+    <a href="forma.admin.blade.php">Admin register</a><br><br>
+    <a href="/forma">Back to form</a>
 </body>
 </html>
 

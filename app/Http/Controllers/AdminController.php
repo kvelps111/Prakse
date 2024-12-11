@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Hash; // Import Hash facade
-use Carbon\Carbon; // Import Carbon for date and time handling
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -17,9 +16,9 @@ class AdminController extends Controller
         ]);
 
         Admin::create([
-            'name' => '', // Placeholder value
+            'name' => '', 
             'email' => $request->email,
-            'password' => Hash::make($request->password), // Hash the password
+            'password' => Hash::make($request->password), 
         ]);
 
         return redirect()->back()->with('success', 'Admin registered successfully!');

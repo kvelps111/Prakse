@@ -25,6 +25,7 @@ Route::get('/forma.admin.blade.php', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/export-csv',[DashboardController::class,'exportCsv'])->name('export.csv');
 
 
 

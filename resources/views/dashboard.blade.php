@@ -10,6 +10,9 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+        input {
+            font-size: 2em;
+        }
         table {
             width: 50%;
             border-collapse: collapse;
@@ -59,9 +62,9 @@
 
     <form method="GET" action="{{ url('/dashboard') }}">
         @csrf
+        <h1>Filters</h1>
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" placeholder="Email">
-
         <label for="priority">Choose a priority level</label>
         <select name="priority" id="priority">
             <option value="">Select priority</option>
@@ -84,29 +87,56 @@
             <option value="old">Old</option>
             <option value="new">New</option>
         </select>
-
         <button type="submit">Submit</button>
+        <button id="remove_filter">Remove filters</button><br>
     </form>
 
     <br><br>
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Email</th>
                 <th>Message</th>
                 <th>Option</th>
                 <th>Priority</th>
                 <th>Uploaded</th>
+                <th>Status</th>
+                <th>Mainit Statusu</th>
+                <th>Comments</th>
             </tr>
         </thead>
         <tbody>
             @foreach($contacts as $contact)
                 <tr>
+                    <td>{{$contact->id}}</td>
                     <td>{{ $contact->email }}</td>
                     <td>{{ $contact->message }}</td>
                     <td>{{ $contact->option }}</td>
                     <td>{{ $contact->priority }}</td>
-                    <td>{{ $contact->updated_at }}</td>
+                    <td>{{ $contact->created_at }}</td>
+                    <td>{{$contact->status}}</td>
+                    <td>
+                        <form action="{{ route('contact.changestatus', ['id' => $contact->id]) }}" method="POST">
+                            @csrf
+                            <label for="status">Status</label>
+                            <select name="status" id="status">
+                                <option value="New">Jauns</option>
+                                <option value="Procesā">Procesā</option>
+                                <option value="Atrisināts">Atrisināts</option>
+                                <option value="Slēgts">Slēgts</option>
+                            </select><br>
+                            <button type="submit">Mainīt statusu</button>
+                        </form>
+                    </td>
+                    <td>
+                        <!-- Display the comment field and allow editing -->
+                        <form action="{{ route('comment.update', ['contact' => $contact->id]) }}" method="POST">
+                            @csrf
+                            <input type="text" name="comment" value="{{ old('comment', $comment->comment ?? '') }}">
+                            <button type="submit">Submit</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

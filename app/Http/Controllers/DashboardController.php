@@ -63,4 +63,20 @@ class DashboardController extends Controller
 
         return response()->download($filename, $filename, $headers);
     }
+
+    public function changestatus(Request $request)
+    {
+        $request->validate([
+            'ticket_id' => 'required|integer',
+            'status' => 'required|string'
+        ]);
+
+        $contact = Contact::findOrFail($request->input('ticket_id'));
+        $contact->status = $request->input('status');
+        $contact->save();
+
+        return redirect()->back()->with('success', 'Status updated successfully!');
+    }
 }
+
+
